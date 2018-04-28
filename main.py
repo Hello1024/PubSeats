@@ -14,13 +14,31 @@
 
 import webapp2
 
+from google.appengine.ext import ndb
+
+
+class Order(ndb.Model):
+    """Models an individual Guestbook entry with content and date."""
+    content = ndb.StringProperty()
+    contenta = ndb.StringProperty()
+    
+    date = ndb.DateTimeProperty(auto_now_add=True)
+
+    @classmethod
+    def query_book(cls, ancestor_key):
+        return cls.query(ancestor=ancestor_key).order(-cls.date)
+
+
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/plain'
         self.response.write('Hello, World!')
+        greeting = Order(parent=ndb.Key("Book", "*notitle*"),
+                            contenta=self.request.get('content'))
+        greeting.put()
 
 
 app = webapp2.WSGIApplication([
-    ('/foo', MainPage),
+    ('/api/foo', MainPage),
 ], debug=True)
