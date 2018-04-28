@@ -10,7 +10,10 @@ handlers:
   static_files: static/index.htm
   upload: static/index.htm
 
+- url: /([^.]*)
+  static_files: static/\1.htm
+  upload: static/(.*)
+
 - url: /(.*)
   static_files: static/\1
   upload: static/(.*)
-
