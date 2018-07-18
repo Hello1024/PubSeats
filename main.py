@@ -1,17 +1,3 @@
-# Copyright 2016 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import webapp2
 
 from google.appengine.ext import ndb
@@ -19,8 +5,10 @@ from google.appengine.ext import ndb
 
 class Order(ndb.Model):
     """Models an individual Guestbook entry with content and date."""
-    content = ndb.StringProperty()
-    contenta = ndb.StringProperty()
+    userid = ndb.StringProperty()
+    paytype = ndb.StringProperty()
+    address = ndb.StringProperty()
+    email = ndb.StringProperty()
     
     date = ndb.DateTimeProperty(auto_now_add=True)
 
@@ -30,15 +18,20 @@ class Order(ndb.Model):
 
 
 
-class MainPage(webapp2.RequestHandler):
+class OrderAPI(webapp2.RequestHandler):
     def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write('Hello, World!')
-        greeting = Order(parent=ndb.Key("Book", "*notitle*"),
-                            contenta=self.request.get('content'))
-        greeting.put()
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write('{}')
+        o = Order(parent=ndb.Key("Book", "*notitle*"),
+                         userid=self.request.get('userid'),
+                         paytype=self.request.get('paytype'),
+                         address=self.request.get('address'),
+                         email=self.request.get('email'),
+                         )
+        o.put()
+
 
 
 app = webapp2.WSGIApplication([
-    ('/api/foo', MainPage),
+    ('/api/order', OrderAPI),
 ], debug=True)
