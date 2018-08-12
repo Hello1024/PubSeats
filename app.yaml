@@ -9,10 +9,10 @@ handlers:
 
 - url: /
   secure: always
-  static_files: guerilla-gifts/www/index.html
-  upload: guerilla-gifts/www/index.html
+  static_files: guerilla-gifts/platforms/browser/www/index.html
+  upload: guerilla-gifts/platforms/browser/www/index.html
 
 - url: /(.*)
   secure: always
-  static_files: guerilla-gifts/www/\1
-  upload: guerilla-gifts/www/(.*)
+  static_files: guerilla-gifts/platforms/browser/www/\1
+  upload: guerilla-gifts/platforms/browser/www/(.*)

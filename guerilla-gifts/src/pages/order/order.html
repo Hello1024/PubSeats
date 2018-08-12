@@ -49,26 +49,26 @@
   </ion-item>
 </ion-list>
 
-<button *ngIf="plt.is('cordova') && plt.is('ios')" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
+<button *ngIf="device.platform == 'iOS'" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
   <ion-icon name="pricetag"></ion-icon>
   Pay with the App Store
 </button>
 
-<button *ngIf="plt.is('cordova') && plt.is('android')" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
+<button *ngIf="device.platform == 'Android'" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
   <ion-icon name="pricetag"></ion-icon>
   Pay with Google Play
 </button>
 
-<button *ngIf="!plt.is('cordova') || !plt.is('ios')" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
+<button *ngIf="device.platform != 'iOS'" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
   <ion-icon name="pricetag"></ion-icon>
   Pay with Paypal / Credit Card
 </button>
 
-<div *ngIf="plt.is('cordova') && plt.is('ios')">
+<div *ngIf="device.platform == 'iOS'">
 Other payment methods are available on <a href='https://erraticpacket.com'>erraticpacket.com</a>.
 </div>
 
-<div padding *ngIf="!plt.is('cordova')">
+<div padding *ngIf="device.platform == 'browser'">
 Other payment methods are available in the app:
       <img class=store-badge src='assets/imgs/play-badge.svg'>
       <img class=store-badge src='assets/imgs/apple-badge.svg'>

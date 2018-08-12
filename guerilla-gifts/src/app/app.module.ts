@@ -1,9 +1,14 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+
+import { Device } from '@ionic-native/device';
+
 import { MyApp } from './app.component';
 
 import { InAppPurchase } from '@ionic-native/in-app-purchase';
+import { Dialogs } from '@ionic-native/dialogs';
+
 
 import { FaqPage } from '../pages/faq/faq';
 import { ContactPage } from '../pages/contact/contact';
@@ -40,6 +45,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     InAppPurchase,
+    Dialogs,
+    Device,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
