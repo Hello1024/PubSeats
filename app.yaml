@@ -4,16 +4,15 @@ threadsafe: true
 
 handlers:
 - url: /api/.*
+  secure: always
   script: main.app
 
 - url: /
-  static_files: static/index.htm
-  upload: static/index.htm
-
-- url: /([^.]*)
-  static_files: static/\1.htm
-  upload: static/(.*)
+  secure: always
+  static_files: guerilla-gifts/www/index.html
+  upload: guerilla-gifts/www/index.html
 
 - url: /(.*)
-  static_files: static/\1
-  upload: static/(.*)
+  secure: always
+  static_files: guerilla-gifts/www/\1
+  upload: guerilla-gifts/www/(.*)

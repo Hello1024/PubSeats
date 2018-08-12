@@ -1,0 +1,8 @@
+{
+  "name": "guerilla-gifts",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "eb37190d"
+}

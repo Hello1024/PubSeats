@@ -1,0 +1,77 @@
+<!--
+  Generated template for the OrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Order</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<ion-list>
+	<ion-list-header>
+	  Where should we deliver?
+	</ion-list-header>
+	<ion-item>
+    	<ion-label color="primary" stacked>Address</ion-label>
+    	<ion-input type="input" placeholder="123 Foo Street"></ion-input>
+    	<ion-input type="input" placeholder="New York"></ion-input>
+    	<ion-input type="input" placeholder="USA"></ion-input>
+ 	</ion-item>
+</ion-list>
+
+<ion-list radio-group [(ngModel)]="frequency">
+	<ion-list-header>
+	  How frequent?
+	</ion-list-header>
+  <ion-item>
+    <ion-label>Just one</ion-label>
+    <ion-radio value="once" checked></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Weekly</ion-label>
+    <ion-radio value="weekly"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Monthly</ion-label>
+    <ion-radio value="monthly"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Annually</ion-label>
+    <ion-radio value="annually"></ion-radio>
+  </ion-item>
+</ion-list>
+
+<button *ngIf="plt.is('cordova') && plt.is('ios')" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
+  <ion-icon name="pricetag"></ion-icon>
+  Pay with the App Store
+</button>
+
+<button *ngIf="plt.is('cordova') && plt.is('android')" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
+  <ion-icon name="pricetag"></ion-icon>
+  Pay with Google Play
+</button>
+
+<button *ngIf="!plt.is('cordova') || !plt.is('ios')" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
+  <ion-icon name="pricetag"></ion-icon>
+  Pay with Paypal / Credit Card
+</button>
+
+<div *ngIf="plt.is('cordova') && plt.is('ios')">
+Other payment methods are available on <a href='https://erraticpacket.com'>erraticpacket.com</a>.
+</div>
+
+<div padding *ngIf="!plt.is('cordova')">
+Other payment methods are available in the app:
+      <img class=store-badge src='assets/imgs/play-badge.svg'>
+      <img class=store-badge src='assets/imgs/apple-badge.svg'>
+</div>
+
+</ion-content>

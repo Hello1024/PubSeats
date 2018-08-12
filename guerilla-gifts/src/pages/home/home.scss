@@ -1,0 +1,18 @@
+page-home {
+    .scroll-content {
+	    background: url(/assets/imgs/background.jpg);
+	    background-size: cover;
+	    background-position: 45% 30%;
+
+	    position:absolute;
+    }
+
+	.store-badge {
+		width:140px;
+	}
+
+	h2 {
+	  color: color($colors, dark);
+    }
+
+}
