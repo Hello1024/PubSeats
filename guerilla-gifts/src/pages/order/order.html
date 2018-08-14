@@ -1,9 +1,3 @@
-<!--
-  Generated template for the OrderPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -15,63 +9,70 @@
 
 <ion-content padding>
 
-<ion-list>
-	<ion-list-header>
-	  Where should we deliver?
-	</ion-list-header>
-	<ion-item>
-    	<ion-label color="primary" stacked>Address</ion-label>
-    	<ion-input type="input" placeholder="123 Foo Street"></ion-input>
-    	<ion-input type="input" placeholder="New York"></ion-input>
-    	<ion-input type="input" placeholder="USA"></ion-input>
- 	</ion-item>
-</ion-list>
+  <ion-list>
+  	<ion-list-header>
+  	  Where should we deliver?
+  	</ion-list-header>
+  	<ion-item>
+      	<ion-label color="primary" stacked>Address</ion-label>
+      	<ion-input [(ngModel)]="address1" type="input" placeholder="Line 1"></ion-input>
+      	<ion-input [(ngModel)]="address2" type="input" placeholder="Line 2"></ion-input>
+      	<ion-input [(ngModel)]="city" type="input" placeholder="City"></ion-input>
+        <ion-input [(ngModel)]="state" type="input" placeholder="State/Provence/Region"></ion-input>
+        <ion-input [(ngModel)]="zip" type="input" placeholder="Zip/Postal Code"></ion-input>
+        <ion-select [(ngModel)]="country">
+          <ion-option *ngFor="let country of countries" [value]="country">{{country}}</ion-option>
+        </ion-select>
+        <ion-label color="primary" stacked>Phone (if required for delivery)</ion-label>
+        <ion-input [(ngModel)]="phone" type="input" placeholder="+1 800 12345"></ion-input>
+   	</ion-item>
+  </ion-list>
 
-<ion-list radio-group [(ngModel)]="frequency">
-	<ion-list-header>
-	  How frequent?
-	</ion-list-header>
-  <ion-item>
-    <ion-label>Just one</ion-label>
-    <ion-radio value="once" checked></ion-radio>
-  </ion-item>
-  <ion-item>
-    <ion-label>Weekly</ion-label>
-    <ion-radio value="weekly"></ion-radio>
-  </ion-item>
-  <ion-item>
-    <ion-label>Monthly</ion-label>
-    <ion-radio value="monthly"></ion-radio>
-  </ion-item>
-  <ion-item>
-    <ion-label>Annually</ion-label>
-    <ion-radio value="annually"></ion-radio>
-  </ion-item>
-</ion-list>
+  <ion-list radio-group [(ngModel)]="frequency">
+  	<ion-list-header>
+  	  How frequent?
+  	</ion-list-header>
+    <ion-item>
+      <ion-label>Just one</ion-label>
+      <ion-radio value="" checked></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Weekly</ion-label>
+      <ion-radio value="W"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Monthly</ion-label>
+      <ion-radio value="M"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Annually</ion-label>
+      <ion-radio value="Y"></ion-radio>
+    </ion-item>
+  </ion-list>
 
-<button *ngIf="device.platform == 'iOS'" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
-  <ion-icon name="pricetag"></ion-icon>
-  Pay with the App Store
-</button>
+  <button *ngIf="device.platform == 'iOS'" large strong ion-button round (click)="appBuy()" icon-start style='white-space: unset'>
+    <ion-icon name="pricetag"></ion-icon>
+    Pay with the App Store
+  </button>
 
-<button *ngIf="device.platform == 'Android'" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
-  <ion-icon name="pricetag"></ion-icon>
-  Pay with Google Play
-</button>
+  <button *ngIf="device.platform == 'Android'" large strong ion-button round (click)="appBuy()" icon-start style='white-space: unset'>
+    <ion-icon name="pricetag"></ion-icon>
+    Pay with Google Play
+  </button>
 
-<button *ngIf="device.platform != 'iOS'" large strong ion-button round (click)="onClickMe()" icon-start style='white-space: unset'>
-  <ion-icon name="pricetag"></ion-icon>
-  Pay with Paypal / Credit Card
-</button>
+  <button *ngIf="device.platform != 'iOS'" large strong ion-button round (click)="paypalBuy()" icon-start style='white-space: unset'>
+    <ion-icon name="pricetag"></ion-icon>
+    Pay with Paypal / Credit Card
+  </button>
 
-<div *ngIf="device.platform == 'iOS'">
-Other payment methods are available on <a href='https://erraticpacket.com'>erraticpacket.com</a>.
-</div>
+  <div *ngIf="device.platform == 'iOS'">
+  Other payment methods are available on <a href='https://erraticpacket.com'>erraticpacket.com</a>.
+  </div>
 
-<div padding *ngIf="device.platform == 'browser'">
-Other payment methods are available in the app:
-      <img class=store-badge src='assets/imgs/play-badge.svg'>
-      <img class=store-badge src='assets/imgs/apple-badge.svg'>
-</div>
+  <div padding *ngIf="device.platform == 'browser'">
+  <p>Other payment methods are available in the app:</p>
+        <img class=store-badge src='assets/imgs/play-badge.svg'>
+        <img class=store-badge src='assets/imgs/apple-badge.svg'>
+  </div>
 
 </ion-content>
