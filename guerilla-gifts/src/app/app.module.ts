@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { Device } from '@ionic-native/device';
-
+import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
 import { InAppPurchase } from '@ionic-native/in-app-purchase';
@@ -30,7 +30,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

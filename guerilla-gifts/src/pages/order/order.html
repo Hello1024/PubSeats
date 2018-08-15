@@ -13,22 +13,24 @@
   	<ion-list-header>
   	  Where should we deliver?
   	</ion-list-header>
-  	<ion-item>
-      	<ion-label color="primary" stacked>Address</ion-label>
-      	<ion-input [(ngModel)]="address1" type="input" placeholder="Line 1"></ion-input>
-      	<ion-input [(ngModel)]="address2" type="input" placeholder="Line 2"></ion-input>
-      	<ion-input [(ngModel)]="city" type="input" placeholder="City"></ion-input>
-        <ion-input [(ngModel)]="state" type="input" placeholder="State/Provence/Region"></ion-input>
-        <ion-input [(ngModel)]="zip" type="input" placeholder="Zip/Postal Code"></ion-input>
-        <ion-select [(ngModel)]="country">
+    <ion-item>
+        <ion-label color="primary" stacked>Address</ion-label>
+        <ion-input [(ngModel)]="user_data.address1" type="input" placeholder="Line 1"></ion-input>
+        <ion-input [(ngModel)]="user_data.address2" type="input" placeholder="Line 2"></ion-input>
+        <ion-input [(ngModel)]="user_data.city" type="input" placeholder="City"></ion-input>
+        <ion-input [(ngModel)]="user_data.state" type="input" placeholder="State/Provence/Region"></ion-input>
+        <ion-input [(ngModel)]="user_data.zip" type="input" placeholder="Zip/Postal Code"></ion-input>
+        <ion-select [(ngModel)]="user_data.country">
           <ion-option *ngFor="let country of countries" [value]="country">{{country}}</ion-option>
         </ion-select>
+    </ion-item>
+    <ion-item>
         <ion-label color="primary" stacked>Phone (if required for delivery)</ion-label>
-        <ion-input [(ngModel)]="phone" type="input" placeholder="+1 800 12345"></ion-input>
-   	</ion-item>
+        <ion-input [(ngModel)]="user_data.phone" type="input" placeholder="+1 800 12345"></ion-input>
+    </ion-item>
   </ion-list>
 
-  <ion-list radio-group [(ngModel)]="frequency">
+  <ion-list radio-group [(ngModel)]="user_data.frequency">
   	<ion-list-header>
   	  How frequent?
   	</ion-list-header>
