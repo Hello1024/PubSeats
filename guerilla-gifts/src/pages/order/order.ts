@@ -67,7 +67,7 @@ export class OrderPage implements DoCheck {
   }
 
   async paypalBuy() {
-    let txid = await startPurchase();
+    let txid = await this.startPurchase();
 
     let url = 'https://www.paypal.com/cgi-bin/webscr?';
 

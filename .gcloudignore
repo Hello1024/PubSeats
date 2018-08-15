@@ -1,0 +1,10 @@
+/guerilla-gifts/*
+/guerilla-gifts/platforms/*
+/guerilla-gifts/platforms/browser/*
+
+!/guerilla-gifts
+!/guerilla-gifts/platforms
+!/guerilla-gifts/platforms/browser
+!/guerilla-gifts/platforms/browser/www
+
+.git/
