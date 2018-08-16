@@ -14,3 +14,29 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+body {
+  background-color: #D32F2F;
+}
+
+@media only screen and (min-width: 900px) {
+    /* Put entire content in a shadowed box on super wide (desktop) screens */
+	.app-root {
+	    width: 700px;
+	    margin: auto;
+	    position: unset;
+	    border-radius: 10px;
+	    box-shadow: 10px 10px 106px -5px rgba(0,0,0,0.75);
+	}
+	body {
+	  padding: 10px;
+	}
+}
+
+.scroll-content {
+	overflow-y: auto;
+}
+
+h2 {
+	color: color($colors, primary);
+}

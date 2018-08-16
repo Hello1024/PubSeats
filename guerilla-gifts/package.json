@@ -40,6 +40,7 @@
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "rxjs": "5.5.11",
+    "sentry-cordova": "^0.12.2",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
   },
@@ -56,11 +57,15 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-dialogs": {}
+      "cordova-plugin-dialogs": {},
+      "sentry-cordova": {}
     },
     "platforms": [
       "android",
       "browser"
     ]
+  },
+  "config": {
+    "ionic_generate_source_map": "true"
   }
 }

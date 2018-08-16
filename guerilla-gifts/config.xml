@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.erraticpacket" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.erraticpacket" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Erratic Packet</name>
     <description>Sending random stuff to random people since 2018.</description>
     <author email="support@erraticpacket.com" href="http://erraticpacket.com/">Erratic Packet Team</author>
     <content src="index.html" />
     <access origin="*" />
+    <access origin="sentry.io" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -86,4 +87,5 @@
     <allow-navigation href="http://192.168.86.78:8100" />
     <engine name="android" spec="~7.0.0" />
     <engine name="browser" spec="~5.0.4" />
+    <plugin name="sentry-cordova" spec="^0.12.2" />
 </widget>

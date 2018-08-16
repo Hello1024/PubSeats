@@ -14,10 +14,24 @@ import { FaqPage } from '../pages/faq/faq';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { OrderPage } from '../pages/order/order';
+import { DonePage } from '../pages/done/done';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+import * as Sentry from 'sentry-cordova';
+
+class SentryIonicErrorHandler extends IonicErrorHandler {
+  handleError(error) {
+    super.handleError(error);
+    try {
+      Sentry.captureException(error.originalError || error);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
 
 @NgModule({
   declarations: [
@@ -26,6 +40,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ContactPage,
     HomePage,
     OrderPage,
+    DonePage,
     TabsPage
   ],
   imports: [
@@ -40,7 +55,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ContactPage,
     HomePage,
     OrderPage,
-    TabsPage
+    TabsPage,
+    DonePage,
   ],
   providers: [
     StatusBar,
@@ -48,7 +64,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     InAppPurchase,
     Dialogs,
     Device,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: SentryIonicErrorHandler}
   ]
 })
 export class AppModule {}
