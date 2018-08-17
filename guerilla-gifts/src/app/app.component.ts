@@ -6,22 +6,25 @@ import { Storage } from '@ionic/storage';
 import { Device } from '@ionic-native/device';
 
 
-import { TabsPage } from '../pages/tabs/tabs';
+import { FaqPage } from '../pages/faq/faq';
+import { ContactPage } from '../pages/contact/contact';
+import { HomePage } from '../pages/home/home';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
-
-  @ViewChild('myNav') nav;
+  tab1Root = HomePage;
+  tab2Root = FaqPage;
+  tab3Root = ContactPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage, public device: Device) {
     platform.ready().then(async () => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
-      if (this.device.platform == 'browser') {
+      /*
+      if (this.device.platform == 'browser' && Sentry) {
         // Monkey patch Sentry because they didn't test the 'browser' platform...
         // @ts-ignore: Sentry exists in the window object
         Sentry.CordovaBackend.prototype.nativeCall = function () {
@@ -32,9 +35,10 @@ export class MyApp {
         // @ts-ignore: Sentry exists in the window object
         Sentry.CordovaBackend.prototype.isCordova = function () { return false; };
       }
-      // @ts-ignore: Sentry exists in the window object
-      Sentry.init({ dsn: 'https://99d224e9c9db434c81b3bffc0735ca4d@sentry.io/1263173' });
 
+      // @ts-ignore: Sentry exists in the window object
+      if (Sentry) Sentry.init({ dsn: 'https://99d224e9c9db434c81b3bffc0735ca4d@sentry.io/1263173' });
+*/
       // set a uuid if one doesn't exist.
       let query_uuid = platform.getQueryParam('uuid');
       let uuid = await storage.set('uuid', await storage.get('uuid') || query_uuid || uuidv4());
@@ -50,12 +54,6 @@ export class MyApp {
       splashScreen.hide();
     });
   }
-
-  ngAfterViewInit() {
-    // Let's navigate from TabsPage to Page1
-    this.nav.push(LoginPage);
-  }
-
 }
 
 

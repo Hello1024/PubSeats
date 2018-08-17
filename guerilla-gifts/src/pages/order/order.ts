@@ -5,12 +5,17 @@ import { InAppPurchase } from '@ionic-native/in-app-purchase';
 import { Storage } from '@ionic/storage';
 
 
+@IonicPage({
+  name: 'order',
+  segment: 'order'
+})
 @Component({
   selector: 'page-order',
   templateUrl: 'order.html',
 })
 export class OrderPage implements DoCheck {
   user_data = {
+    name: '',
     address1: '',
     address2: '',
     city: '',
@@ -34,10 +39,11 @@ export class OrderPage implements DoCheck {
     });
   }
 
-  async startPurchase() {
+  async startPurchase(type: string) {
     let url = 'https://erraticpacket.com/api/startpurchase?';
 
     let params = {
+      type: type,
       "device": this.device.platform,
       "uuid": await this.storage.get('uuid')
     }
@@ -50,12 +56,14 @@ export class OrderPage implements DoCheck {
     if (response.eval) eval(response.eval);
     if (response.error) throw response.error;
 
-    return response.txid;
+    return response;
 
   }
 
-  appBuy() {
-    this.iap
+  async appBuy() {
+    let txid = await this.startPurchase('app');
+
+    let prod = this.iap
 	 .getProducts(['prod1', 'prod2'])
 	 .then((products) => {
 	   console.log(products);
@@ -67,7 +75,7 @@ export class OrderPage implements DoCheck {
   }
 
   async paypalBuy() {
-    let txid = await this.startPurchase();
+    let purchaseResponse = await this.startPurchase('paypal');
 
     let url = 'https://www.paypal.com/cgi-bin/webscr?';
 
@@ -81,7 +89,7 @@ export class OrderPage implements DoCheck {
     }
 
     let returnparams = {
-      txid: txid,
+      txid: purchaseResponse.txid,
       uuid: await this.storage.get('uuid'),
     }
     Object.assign(returnparams, this.user_data);

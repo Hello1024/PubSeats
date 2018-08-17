@@ -4,7 +4,9 @@ import { OrderPage } from '../order/order';
 import { Device } from '@ionic-native/device';
 
 
-
+@IonicPage({
+  name: 'home',
+})
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

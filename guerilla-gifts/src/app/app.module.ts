@@ -10,12 +10,11 @@ import { InAppPurchase } from '@ionic-native/in-app-purchase';
 import { Dialogs } from '@ionic-native/dialogs';
 
 
-import { FaqPage } from '../pages/faq/faq';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { OrderPage } from '../pages/order/order';
-import { DonePage } from '../pages/done/done';
-import { TabsPage } from '../pages/tabs/tabs';
+import { FaqPageModule } from '../pages/faq/faq.module';
+import { ContactPageModule } from '../pages/contact/contact.module';
+import { HomePageModule } from '../pages/home/home.module';
+import { OrderPageModule } from '../pages/order/order.module';
+import { DonePageModule } from '../pages/done/done.module';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,28 +34,21 @@ class SentryIonicErrorHandler extends IonicErrorHandler {
 
 @NgModule({
   declarations: [
-    MyApp,
-    FaqPage,
-    ContactPage,
-    HomePage,
-    OrderPage,
-    DonePage,
-    TabsPage
+    MyApp
   ],
   imports: [
     BrowserModule,
+    FaqPageModule,
+    ContactPageModule,
+    HomePageModule,
+    OrderPageModule,
+    DonePageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    FaqPage,
-    ContactPage,
-    HomePage,
-    OrderPage,
-    TabsPage,
-    DonePage,
   ],
   providers: [
     StatusBar,

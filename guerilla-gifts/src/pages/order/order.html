@@ -10,30 +10,39 @@
 <ion-content padding>
 
   <ion-list>
-  	<ion-list-header>
-  	  Where should we deliver?
-  	</ion-list-header>
+    <ion-label color="primary" stacked>Who For?</ion-label>
     <ion-item>
-        <ion-label color="primary" stacked>Address</ion-label>
-        <ion-input [(ngModel)]="user_data.address1" type="input" placeholder="Line 1"></ion-input>
-        <ion-input [(ngModel)]="user_data.address2" type="input" placeholder="Line 2"></ion-input>
-        <ion-input [(ngModel)]="user_data.city" type="input" placeholder="City"></ion-input>
-        <ion-input [(ngModel)]="user_data.state" type="input" placeholder="State/Provence/Region"></ion-input>
-        <ion-input [(ngModel)]="user_data.zip" type="input" placeholder="Zip/Postal Code"></ion-input>
-        <ion-select [(ngModel)]="user_data.country">
+        <ion-input [(ngModel)]="user_data.name" type="input" placeholder="Bob Smith" autocomplete="name"></ion-input>
+    </ion-item>
+    <ion-label color="primary" stacked>Address</ion-label>
+    <ion-item>
+        <ion-input [(ngModel)]="user_data.address1" type="input" placeholder="Line 1" autocomplete="address-line1"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input [(ngModel)]="user_data.address2" type="input" placeholder="Line 2" autocomplete="address-line2"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input [(ngModel)]="user_data.city" type="input" placeholder="City"  autocomplete="address-level1"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input [(ngModel)]="user_data.state" type="input" placeholder="State/Provence/Region"  autocomplete="address-level2"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input [(ngModel)]="user_data.zip" type="input" placeholder="Zip/Postal Code"  autocomplete="postal-code"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-select [(ngModel)]="user_data.country"  autocomplete="country">
           <ion-option *ngFor="let country of countries" [value]="country">{{country}}</ion-option>
         </ion-select>
     </ion-item>
+    <ion-label color="primary" stacked>Phone (if required for delivery)</ion-label>
     <ion-item>
-        <ion-label color="primary" stacked>Phone (if required for delivery)</ion-label>
-        <ion-input [(ngModel)]="user_data.phone" type="input" placeholder="+1 800 12345"></ion-input>
+        <ion-input [(ngModel)]="user_data.phone" type="input" placeholder="+1 800 12345"  autocomplete="tel"></ion-input>
     </ion-item>
   </ion-list>
 
   <ion-list radio-group [(ngModel)]="user_data.frequency">
-  	<ion-list-header>
-  	  How frequent?
-  	</ion-list-header>
+  	<ion-label color="primary" stacked>How Often?</ion-label>
     <ion-item>
       <ion-label>Just one</ion-label>
       <ion-radio value="" checked></ion-radio>
@@ -51,30 +60,30 @@
       <ion-radio value="Y"></ion-radio>
     </ion-item>
   </ion-list>
+  <div style='text-align: center'>
+    <button *ngIf="device.platform == 'iOS'" large strong ion-button round (click)="appBuy()" icon-start style='white-space: unset'>
+      <ion-icon name="pricetag"></ion-icon>
+      Pay with the App Store
+    </button>
 
-  <button *ngIf="device.platform == 'iOS'" large strong ion-button round (click)="appBuy()" icon-start style='white-space: unset'>
-    <ion-icon name="pricetag"></ion-icon>
-    Pay with the App Store
-  </button>
+    <button *ngIf="device.platform == 'Android'" large strong ion-button round (click)="appBuy()" icon-start style='white-space: unset'>
+      <ion-icon name="pricetag"></ion-icon>
+      Pay with Google Play
+    </button>
 
-  <button *ngIf="device.platform == 'Android'" large strong ion-button round (click)="appBuy()" icon-start style='white-space: unset'>
-    <ion-icon name="pricetag"></ion-icon>
-    Pay with Google Play
-  </button>
+    <button *ngIf="device.platform != 'iOS'" large strong ion-button round (click)="paypalBuy()" icon-start style='white-space: unset'>
+      <ion-icon name="pricetag"></ion-icon>
+      Pay with Paypal / Credit Card
+    </button>
 
-  <button *ngIf="device.platform != 'iOS'" large strong ion-button round (click)="paypalBuy()" icon-start style='white-space: unset'>
-    <ion-icon name="pricetag"></ion-icon>
-    Pay with Paypal / Credit Card
-  </button>
+    <div *ngIf="device.platform == 'iOS'">
+    Other payment methods are available on <a href='https://erraticpacket.com'>erraticpacket.com</a>.
+    </div>
 
-  <div *ngIf="device.platform == 'iOS'">
-  Other payment methods are available on <a href='https://erraticpacket.com'>erraticpacket.com</a>.
+    <div padding *ngIf="device.platform == 'browser'">
+    <p>Other payment methods are available in the app:</p>
+          <img class=store-badge src='assets/imgs/play-badge.svg'>
+          <img class=store-badge src='assets/imgs/apple-badge.svg'>
+    </div>
   </div>
-
-  <div padding *ngIf="device.platform == 'browser'">
-  <p>Other payment methods are available in the app:</p>
-        <img class=store-badge src='assets/imgs/play-badge.svg'>
-        <img class=store-badge src='assets/imgs/apple-badge.svg'>
-  </div>
-
 </ion-content>
