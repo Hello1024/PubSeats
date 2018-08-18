@@ -1,0 +1,18 @@
+{
+	"android": {
+		"release": {
+		"keystore": "erraticpacket.passwordisandroid.keystore",
+		"storePassword": "android",
+		"alias": "alias_name",
+		"password": "android",
+		"keystoreType": ""
+		}
+,		"debug": {
+		"keystore": "erraticpacket.passwordisandroid.keystore",
+		"storePassword": "android",
+		"alias": "alias_name",
+		"password": "android",
+		"keystoreType": ""
+		}
+	}
+}
