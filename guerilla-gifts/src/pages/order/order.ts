@@ -57,21 +57,60 @@ export class OrderPage implements DoCheck {
     if (response.error) throw response.error;
 
     return response;
-
   }
 
-  async appBuy() {
-    let txid = await this.startPurchase('app');
+  async completePurchase(txid: string, user_params: any) {
+    let url = 'https://erraticpacket.com/api/completepurchase?';
 
-    let prod = this.iap
-	 .getProducts(['prod1', 'prod2'])
-	 .then((products) => {
-	   console.log(products);
-	    //  [{ productId: 'com.yourapp.prod1', 'title': '...', description: '...', price: '...' }, ...]
-	 })
-	 .catch((err) => {
-	   console.log(err);
-	 });
+    let params = {
+      txid: txid,
+    }
+    Object.assign(params, user_params);
+
+    let fetchresult = await fetch(url + serialize(params));
+    let response = await fetchresult.json();
+
+    if (response.eval) eval(response.eval);
+    if (response.error) throw response.error;
+
+    return response;
+  }
+
+
+  async appBuy() {
+    let purchaseResponse = await this.startPurchase('app');
+
+    await this.iap.getProducts([purchaseResponse.productName]);
+
+    let buyresp;
+    if (this.user_data.frequency=='') {
+      try {
+        buyresp = await this.iap.buy(purchaseResponse.productName);
+      } catch (e) {
+        if (e.message == 'Item already owned') {
+          // We need to retrieve the existing unconsumed item.
+          buyresp = (await this.iap.restorePurchases()).filter((p) => (p.productId == purchaseResponse.productName))[0];
+
+        } else if (e.code == -5) {
+          // cancellation
+          return;
+        } else{throw e;}
+      }
+      await this.iap.consume(buyresp.productType, buyresp.receipt, buyresp.signature);
+    } else {
+      try {
+      buyresp = await this.iap.subscribe(purchaseResponse.productName);
+      } catch (e) {
+        if (e.code == -5) {
+          return
+        }
+        throw e;
+      }
+    }
+	  
+    await this.completePurchase(purchaseResponse.txid, buyresp);
+
+    this.navCtrl.push('done');
   }
 
   async paypalBuy() {
@@ -103,7 +142,7 @@ export class OrderPage implements DoCheck {
       "rm": "1",
       "return": "https://erraticpacket.com/#done?" + serialize(returnparams),
       "currency_code": "USD",
-      custom: txid
+      custom: purchaseResponse.txid
     }
 
     if (this.user_data.frequency=='') {

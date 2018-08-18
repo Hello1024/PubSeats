@@ -21,7 +21,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import * as Sentry from 'sentry-cordova';
 
-class SentryIonicErrorHandler extends IonicErrorHandler {
+export class SentryIonicErrorHandler extends IonicErrorHandler {
   handleError(error) {
     super.handleError(error);
     try {
@@ -29,6 +29,7 @@ class SentryIonicErrorHandler extends IonicErrorHandler {
     } catch (e) {
       console.error(e);
     }
+    alert('Sorry - something went wrong!  Try refreshing/updating the app, and if the problem persisists drop a message to support@erraticpacket.com.')
   }
 }
 

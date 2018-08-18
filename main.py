@@ -1,5 +1,5 @@
 import webapp2
-import uuid
+import json
 
 from google.appengine.ext import ndb
 
@@ -15,7 +15,6 @@ class Purchase(ndb.Expando):
 class Link(ndb.Expando):
     _default_indexed = False
     date = ndb.DateTimeProperty(auto_now_add=True)
-
 
 class CompletePurchaseAPI(webapp2.RequestHandler):
     def get(self):
@@ -33,10 +32,10 @@ class CompletePurchaseAPI(webapp2.RequestHandler):
                 continue
             # Only allow adding new properties, not overwriting existing ones.
             if p._properties.get(k) is None:
-                o.__setattr__(k, v)
+                p.__setattr__(k, v)
 
         p.put()
-        self.response.write('{ "txid": "%s"}' % (p.key.urlsafe()) )
+        self.response.write('{}')
 
 
 class StartPurchaseAPI(webapp2.RequestHandler):
@@ -44,6 +43,13 @@ class StartPurchaseAPI(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
         o = Purchase(parent=ndb.Key("User", self.request.get('uuid')))
+
+        resp = {}
+        if self.request.get('type') == 'app':
+            freq = self.request.get('frequency')
+            product_names = {'': 'onegift', 'W': 'weeklygift', 'M': 'monthlygift', 'Y': 'annualgift'}
+            resp['productName'] = product_names[freq]
+        
         for k,v in self.request.GET.items():
             # Check for reserved/special keys
             if k.startswith('_') or k.lower() == 'key':
@@ -51,7 +57,9 @@ class StartPurchaseAPI(webapp2.RequestHandler):
             o.__setattr__(k, v)
 
         o.put()
-        self.response.write('{ "txid": "%s"}' % (o.key.urlsafe()) )
+        resp['txid'] = o.key.urlsafe()
+
+        self.response.write(json.dumps(resp))
 
 class LinkUUIDAPI(webapp2.RequestHandler):
     def get(self):

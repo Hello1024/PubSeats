@@ -15,10 +15,6 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-body {
-  background-color: #D32F2F;
-}
-
 @media only screen and (min-width: 900px) {
     /* Put entire content in a shadowed box on super wide (desktop) screens */
 	.app-root {
@@ -30,6 +26,7 @@ body {
 	}
 	body {
 	  padding: 10px;
+	  background-color: #D32F2F;
 	}
 }
 

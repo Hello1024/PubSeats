@@ -23,8 +23,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
-      /*
-      if (this.device.platform == 'browser' && Sentry) {
+      if (this.device.platform == 'browser') {
         // Monkey patch Sentry because they didn't test the 'browser' platform...
         // @ts-ignore: Sentry exists in the window object
         Sentry.CordovaBackend.prototype.nativeCall = function () {
@@ -37,8 +36,8 @@ export class MyApp {
       }
 
       // @ts-ignore: Sentry exists in the window object
-      if (Sentry) Sentry.init({ dsn: 'https://99d224e9c9db434c81b3bffc0735ca4d@sentry.io/1263173' });
-*/
+      Sentry.init({ dsn: 'https://99d224e9c9db434c81b3bffc0735ca4d@sentry.io/1263173' });
+
       // set a uuid if one doesn't exist.
       let query_uuid = platform.getQueryParam('uuid');
       let uuid = await storage.set('uuid', await storage.get('uuid') || query_uuid || uuidv4());

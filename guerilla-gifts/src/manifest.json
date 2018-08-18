@@ -9,5 +9,6 @@
     "type": "image/png"
   }],
   "background_color": "#4e8ef7",
-  "theme_color": "#4e8ef7"
+  "theme_color": "#4e8ef7",
+  "play_store_key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm+AxhXq42nllNF3oRRKvjflSJhbB+aahPUVRfEAGjEr8n95Z4PaHVQGR1ovXdXonMAsaowT4XfqxmKrjiqRgKORCbJAM43GglFQ+600navEULe4crDosUXrXEUoKUXra/LCV6llBmPXYi+AyRspdz+zqt63EbHrdNgQF86tA+88GQxhNli2mw1zlaB+ryolCCr9veWKPEqYKBtUaDFx1p1b3gv7YKXA8JMrTb15UxOYujcR1+sVMf6YIjOCX2jMHrYqGCMdKteCVUYGTYc39s7d6EgmWsnuqUWhta6N/r5HPmseWT6HApRqnylaxz0b/cNxgVtPAG+ryZSrXaQPJVwIDAQAB"
 }
