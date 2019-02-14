@@ -10,6 +10,7 @@ import { InAppPurchase } from '@ionic-native/in-app-purchase';
 import { Dialogs } from '@ionic-native/dialogs';
 
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { FaqPageModule } from '../pages/faq/faq.module';
 import { ContactPageModule } from '../pages/contact/contact.module';
 import { HomePageModule } from '../pages/home/home.module';
@@ -57,6 +58,7 @@ export class SentryIonicErrorHandler extends IonicErrorHandler {
     InAppPurchase,
     Dialogs,
     Device,
+    Geolocation,
     {provide: ErrorHandler, useClass: SentryIonicErrorHandler}
   ]
 })
