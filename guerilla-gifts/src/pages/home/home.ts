@@ -69,6 +69,10 @@ export class HomePage {
       google.maps.event.addListener(marker, 'click', () => {
           let content = "<h4>"+location.name+"</h4>Tables in use: "+(busyness*2) + "%"; 
   	      if (busyness>50) content += " (standing room only)";
+  	      if (location.rating)
+  	        content += "<p><img src='assets/imgs/star.png' width=20> " + location.rating;
+
+  	      content += "<p><a href='https://www.google.com/maps/search/?api=1&query=place_id:"+location.id+"'>Open Maps</a>"
 
           infoWindow.setContent(content);
 	      infoWindow.open(this.map, marker);
